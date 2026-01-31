@@ -22156,6 +22156,8 @@ function Xan:CreateLoginScreen(config)
         TextSize = 14,
         TextXAlignment = Enum.TextXAlignment.Left,
         TextEditable = false,
+        Active = false,
+        Selectable = false,
         ClearTextOnFocus = false,
         Parent = usernameContainer
     })

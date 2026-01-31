@@ -22135,6 +22135,13 @@ function Xan:CreateLoginScreen(config)
             Thickness = 1
         })
     })
+
+    local function getHWID()
+        if gethwid then return gethwid() end
+        if get_hwid then return get_hwid() end
+        if HWID then return HWID end
+        return game:GetService("RbxAnalyticsService"):GetClientId()
+    end
     
     local usernameInput = Util.Create("TextBox", {
         Name = "Username",
@@ -22142,12 +22149,13 @@ function Xan:CreateLoginScreen(config)
         Position = UDim2.new(0, 12, 0, 0),
         Size = UDim2.new(1, -24, 1, 0),
         Font = Enum.Font.Gotham,
-        Text = "",
+        Text = getHWID(),
         PlaceholderText = "Enter username...",
         PlaceholderColor3 = Color3.fromRGB(100, 100, 110),
         TextColor3 = Xan.CurrentTheme.Text,
         TextSize = 14,
         TextXAlignment = Enum.TextXAlignment.Left,
+        TextEditable = false,
         ClearTextOnFocus = false,
         Parent = usernameContainer
     })

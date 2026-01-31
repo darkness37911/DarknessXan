@@ -130,8 +130,8 @@ Xan.Themes = {
     Default = {
         Name = "Default",
         Accent = Color3.fromRGB(159, 8, 223),
-        AccentDark = Color3.fromRGB(185, 60, 60),
-        AccentLight = Color3.fromRGB(255, 120, 120),
+        AccentDark = Color3.fromRGB(123, 6, 173),
+        AccentLight = Color3.fromRGB(196, 91, 255),
         
         Background = Color3.fromRGB(15, 15, 18),
         BackgroundSecondary = Color3.fromRGB(20, 20, 25),
@@ -151,15 +151,15 @@ Xan.Themes = {
         TextMuted = Color3.fromRGB(70, 70, 85),
         
         Toggle = Color3.fromRGB(45, 45, 55),
-        ToggleEnabled = Color3.fromRGB(232, 84, 84),
+        ToggleEnabled = Color3.fromRGB(159, 8, 223),
         ToggleKnob = Color3.fromRGB(255, 255, 255),
         
         Slider = Color3.fromRGB(40, 40, 50),
-        SliderFill = Color3.fromRGB(232, 84, 84),
+        SliderFill = Color3.fromRGB(159, 8, 223),
         
         Input = Color3.fromRGB(25, 25, 32),
         InputBorder = Color3.fromRGB(50, 50, 65),
-        InputFocused = Color3.fromRGB(232, 84, 84),
+        InputFocused = Color3.fromRGB(181, 59, 255),
         
         Dropdown = Color3.fromRGB(25, 25, 32),
         DropdownHover = Color3.fromRGB(35, 35, 45),

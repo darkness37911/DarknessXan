@@ -22152,7 +22152,7 @@ function Xan:CreateLoginScreen(config)
         Text = getHWID(),
         PlaceholderText = "Enter username...",
         PlaceholderColor3 = Color3.fromRGB(100, 100, 110),
-        TextColor3 = Xan.CurrentTheme.Text,
+        TextColor3 = Color3.fromRGB(150, 150, 150),
         TextSize = 14,
         TextXAlignment = Enum.TextXAlignment.Left,
         TextEditable = false,

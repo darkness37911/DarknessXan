@@ -22247,7 +22247,7 @@ function Xan:CreateLoginScreen(config)
         local text = passwordInput.Text
         
         if #text == 0 then
-            passwordOverlay.Text = "Enter key..."
+            passwordOverlay.Text = "Enter the key..."
             passwordOverlay.TextColor3 = Color3.fromRGB(100, 100, 110)
         else
             if passwordVisible then

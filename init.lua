@@ -20483,7 +20483,7 @@ function Xan:Notify(config)
                 Size = UDim2.new(1, -iconOffset, 0, IsMobile and 22 or 20),
                 Font = Enum.Font.Gotham,
                 Text = content,
-                TextColor3 = Color3.fromRGB(209, 209, 218),
+                TextColor3 = Color3.fromRGB(195, 195, 205),
                 TextSize = IsMobile and 12 or 11,
                 TextXAlignment = Enum.TextXAlignment.Left,
                 TextTruncate = Enum.TextTruncate.AtEnd,

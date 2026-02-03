@@ -23143,11 +23143,67 @@ function Xan:CreateLoginScreen(config)
 
     })
     
+    local function getDisabledShade(color)
+        return color:Lerp(Color3.new(0, 0, 0), 0.25)
+    end
+    
+    local loginBtnDisabled = false
+    local loginBtnAnimating = false
+    local disabledAccent = getDisabledShade(Xan.CurrentTheme.Accent)
+    local disabledAccentHover = getDisabledShade(Xan.CurrentTheme.AccentLight)
+    local loginDisableDuration = 10
+    
     loginBtn.MouseEnter:Connect(function()
-        Util.Tween(loginBtn, 0.15, { BackgroundColor3 = Xan.CurrentTheme.AccentLight })
+        if loginBtnAnimating then
+            return
+        end
+        
+        local target = loginBtnDisabled and disabledAccentHover or Xan.CurrentTheme.AccentLight
+        Util.Tween(loginBtn, 0.15, { BackgroundColor3 = target })
     end)
     loginBtn.MouseLeave:Connect(function()
-        Util.Tween(loginBtn, 0.15, { BackgroundColor3 = Xan.CurrentTheme.Accent })
+        if loginBtnAnimating then
+            return
+        end
+        
+        local target = loginBtnDisabled and disabledAccent or Xan.CurrentTheme.Accent
+        Util.Tween(loginBtn, 0.15, { BackgroundColor3 = target })
+    end)
+
+    local keyHelpContainer = Util.Create("Frame", {
+        Name = "KeyHelpRow",
+        BackgroundTransparency = 1,
+        Position = UDim2.new(0, 0, 0, 268),
+        Size = UDim2.new(1, 0, 0, 18),
+        Parent = formContainer
+    })
+    
+    Util.Create("TextLabel", {
+        BackgroundTransparency = 1,
+        Size = UDim2.new(0.7, 0, 1, 0),
+        Font = Enum.Font.Gotham,
+        Text = "Where do I get key?",
+        TextColor3 = Xan.CurrentTheme.TextDim,
+        TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Right,
+        Parent = keyHelpContainer
+    })
+    
+    local discordBtn = Util.Create("TextButton", {
+        Name = "KeyHelpDiscord",
+        BackgroundTransparency = 1,
+        Position = UDim2.new(0.7, 6, 0, 0),
+        Size = UDim2.new(0.3, -6, 1, 0),
+        Font = Enum.Font.GothamBold,
+        Text = "Discord",
+        TextColor3 = Xan.CurrentTheme.Accent,
+        TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        Parent = keyHelpContainer
+    })
+    
+    discordBtn.MouseButton1Click:Connect(function()
+        print("Discord clicked")
     end)
     
     if showSignup then
@@ -23223,15 +23279,34 @@ function Xan:CreateLoginScreen(config)
     closeBtn.MouseButton1Click:Connect(closeLogin)
     
     loginBtn.MouseButton1Click:Connect(function()
+        if loginBtnDisabled or loginBtnAnimating then
+            return
+        end
+        
+        loginBtnAnimating = true
+        loginBtn.Active = false
         Util.Tween(loginBtn, 0.08, { BackgroundColor3 = Xan.CurrentTheme.AccentDark })
         task.delay(0.08, function()
-            Util.Tween(loginBtn, 0.15, { BackgroundColor3 = Xan.CurrentTheme.Accent })
+            loginBtnDisabled = true
+            loginBtnAnimating = false
+            Util.Tween(loginBtn, 0.15, { BackgroundColor3 = disabledAccent })
         end)
         
         local result = onLogin(usernameInput.Text, passwordInput.Text)
         if result then
             closeLogin()
+            return
         end
+        
+        task.delay(loginDisableDuration, function()
+            if not loginBtn.Parent then
+                return
+            end
+            
+            loginBtnDisabled = false
+            loginBtn.Active = true
+            Util.Tween(loginBtn, 0.15, { BackgroundColor3 = Xan.CurrentTheme.Accent })
+        end)
     end)
     
     function login:Close()
